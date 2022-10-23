@@ -58,7 +58,11 @@ class CustomTabBarController: UITabBarController {
                                                     tabBarItemModel: amountTabBarItemsModels[n]))
                 }
             }
+            else {
+                returnVCArray.append(setBarItem(viewController,
+                                                tabBarItemModel: amountTabBarItemsModels[n]))
+            }
+            self.viewControllers = returnVCArray
         }
-        self.viewControllers = returnVCArray
     }
 }

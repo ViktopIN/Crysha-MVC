@@ -21,6 +21,7 @@
 		84D35B6C29053D5000BB17F3 /* AppDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B6B29053D5000BB17F3 /* AppDelegateExtension.swift */; };
 		84D35B702905463C00BB17F3 /* TabBarItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B6F2905463C00BB17F3 /* TabBarItemModel.swift */; };
 		84D35B722905589800BB17F3 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B712905589800BB17F3 /* NavigationControllerExtension.swift */; };
+		84D35B772905B16C00BB17F3 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B762905B16C00BB17F3 /* UIImageExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		84D35B6B29053D5000BB17F3 /* AppDelegateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateExtension.swift; sourceTree = "<group>"; };
 		84D35B6F2905463C00BB17F3 /* TabBarItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemModel.swift; sourceTree = "<group>"; };
 		84D35B712905589800BB17F3 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
+		84D35B762905B16C00BB17F3 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +76,6 @@
 			children = (
 				84D35B582901917500BB17F3 /* Resources */,
 				84D35B572901916100BB17F3 /* Sources */,
-				8478213C28FD3C0E00BC1F7F /* ViewController.swift */,
 				84D35B5A290192D500BB17F3 /* FavoritesViewController.swift */,
 				84D35B5C290192D600BB17F3 /* ApplyViewController.swift */,
 				84D35B5E290192D700BB17F3 /* MessagesViewController.swift */,
@@ -86,6 +87,7 @@
 		84D35B572901916100BB17F3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				84D35B7329059D9B00BB17F3 /* MainPage */,
 				84D35B652901DCB900BB17F3 /* TabBarController */,
 				84D35B622901940A00BB17F3 /* Extensions */,
 				84D35B592901929300BB17F3 /* Application */,
@@ -117,6 +119,7 @@
 				84D35B632901942D00BB17F3 /* UIViewControllerExtension.swift */,
 				84D35B6B29053D5000BB17F3 /* AppDelegateExtension.swift */,
 				84D35B712905589800BB17F3 /* NavigationControllerExtension.swift */,
+				84D35B762905B16C00BB17F3 /* UIImageExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -145,6 +148,14 @@
 				84D35B6F2905463C00BB17F3 /* TabBarItemModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		84D35B7329059D9B00BB17F3 /* MainPage */ = {
+			isa = PBXGroup;
+			children = (
+				8478213C28FD3C0E00BC1F7F /* ViewController.swift */,
+			);
+			path = MainPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,6 +237,7 @@
 				84D35B5F290192D700BB17F3 /* MessagesViewController.swift in Sources */,
 				84D35B722905589800BB17F3 /* NavigationControllerExtension.swift in Sources */,
 				84D35B642901942D00BB17F3 /* UIViewControllerExtension.swift in Sources */,
+				84D35B772905B16C00BB17F3 /* UIImageExtension.swift in Sources */,
 				84D35B692901DDFB00BB17F3 /* CustomTabBarItem.swift in Sources */,
 				84D35B702905463C00BB17F3 /* TabBarItemModel.swift in Sources */,
 				8478213928FD3C0E00BC1F7F /* AppDelegate.swift in Sources */,
