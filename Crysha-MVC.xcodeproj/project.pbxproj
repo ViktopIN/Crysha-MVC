@@ -18,6 +18,8 @@
 		84D35B642901942D00BB17F3 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B632901942D00BB17F3 /* UIViewControllerExtension.swift */; };
 		84D35B672901DCD700BB17F3 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B662901DCD700BB17F3 /* CustomTabBarController.swift */; };
 		84D35B692901DDFB00BB17F3 /* CustomTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B682901DDFB00BB17F3 /* CustomTabBarItem.swift */; };
+		84D35B6C29053D5000BB17F3 /* AppDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B6B29053D5000BB17F3 /* AppDelegateExtension.swift */; };
+		84D35B702905463C00BB17F3 /* TabBarItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B6F2905463C00BB17F3 /* TabBarItemModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		84D35B632901942D00BB17F3 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		84D35B662901DCD700BB17F3 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		84D35B682901DDFB00BB17F3 /* CustomTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarItem.swift; sourceTree = "<group>"; };
+		84D35B6B29053D5000BB17F3 /* AppDelegateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateExtension.swift; sourceTree = "<group>"; };
+		84D35B6F2905463C00BB17F3 /* TabBarItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				84D35B632901942D00BB17F3 /* UIViewControllerExtension.swift */,
+				84D35B6B29053D5000BB17F3 /* AppDelegateExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -116,10 +121,27 @@
 		84D35B652901DCB900BB17F3 /* TabBarController */ = {
 			isa = PBXGroup;
 			children = (
+				84D35B6E2905462D00BB17F3 /* Model */,
+				84D35B6D2905461A00BB17F3 /* View */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		84D35B6D2905461A00BB17F3 /* View */ = {
+			isa = PBXGroup;
+			children = (
 				84D35B662901DCD700BB17F3 /* CustomTabBarController.swift */,
 				84D35B682901DDFB00BB17F3 /* CustomTabBarItem.swift */,
 			);
-			path = TabBarController;
+			path = View;
+			sourceTree = "<group>";
+		};
+		84D35B6E2905462D00BB17F3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				84D35B6F2905463C00BB17F3 /* TabBarItemModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8478213D28FD3C0E00BC1F7F /* ViewController.swift in Sources */,
+				84D35B6C29053D5000BB17F3 /* AppDelegateExtension.swift in Sources */,
 				84D35B5B290192D500BB17F3 /* FavoritesViewController.swift in Sources */,
 				84D35B672901DCD700BB17F3 /* CustomTabBarController.swift in Sources */,
 				84D35B61290192D800BB17F3 /* AccountViewController.swift in Sources */,
@@ -200,6 +223,7 @@
 				84D35B5F290192D700BB17F3 /* MessagesViewController.swift in Sources */,
 				84D35B642901942D00BB17F3 /* UIViewControllerExtension.swift in Sources */,
 				84D35B692901DDFB00BB17F3 /* CustomTabBarItem.swift in Sources */,
+				84D35B702905463C00BB17F3 /* TabBarItemModel.swift in Sources */,
 				8478213928FD3C0E00BC1F7F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
