@@ -8,9 +8,9 @@
 import UIKit
 
 extension AppDelegate {
-    func setNavigationControllerBackgroundColor(_ color: UIColor) {
+    func setNavigationControllerBackgroundColor(_ colorName: String) {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = color
+        appearance.backgroundColor = UIColor(named: colorName)
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }

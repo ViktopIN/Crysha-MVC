@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let krishaViewController = UINavigationController(rootViewController: ViewController())
+        self.setNavigationControllerBackgroundColor("navigationControllerColor")
         let krishaViewControllerItemModel = TabBarItemModel(title: "Krisha.kz",
                                                             imageName: "house.circle.fill",
                                                             tag: 0)
