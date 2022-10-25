@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let krishaViewController = UINavigationController(rootViewController: ViewController())
+        let krishaViewController = UINavigationController(rootViewController: MainPageViewController())
         krishaViewController.navigationItem.hidesBackButton = true
         self.setNavigationControllerBackgroundColor("navigationControllerColor")
         let krishaViewControllerItemModel = TabBarItemModel(title: "Krisha.kz",

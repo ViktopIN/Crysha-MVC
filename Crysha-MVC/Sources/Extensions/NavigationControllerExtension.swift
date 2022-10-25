@@ -40,6 +40,7 @@ extension UINavigationController {
                             for: .normal)
             button.setTitleColor(.black,
                                  for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
             button.setImage(image?.scalePreservingAspectRatio(targetSize: CGSize(width: 8, height: 8)),
                             for: .normal)
             button.semanticContentAttribute = .forceRightToLeft
@@ -50,9 +51,12 @@ extension UINavigationController {
         NSLayoutConstraint.activate(
             [
                 button.centerYAnchor.constraint(equalTo: navigationBar.centerYAnchor),
-                button.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor, constant: -20),
-                button.heightAnchor.constraint(equalTo: navigationBar.heightAnchor, multiplier: 0.4),
-                button.widthAnchor.constraint(equalTo: navigationBar.widthAnchor, multiplier: 1/8)
+                button.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor,
+                                                 constant: -20),
+                button.heightAnchor.constraint(equalTo: navigationBar.heightAnchor,
+                                               multiplier: 0.4),
+                button.widthAnchor.constraint(equalTo: navigationBar.widthAnchor,
+                                              multiplier: 1/8)
             ]
         )
     }

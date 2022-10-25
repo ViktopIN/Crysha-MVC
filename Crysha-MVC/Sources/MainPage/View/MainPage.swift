@@ -7,11 +7,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class MainPageViewController: UIViewController {
+    
+    // MARK: - Views -
+    let collectionView: UICollectionView! = nil
+    
+    // MARK: - Initialisation
     override func viewDidLoad() {
         super.viewDidLoad()
-        getPlugLabel()
     }
 }
 
