@@ -123,18 +123,6 @@ class TableCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Methods
     
-    func getModelToCell(this model: TableCellModel) {
-        icon.image = model.image.withTintColor(.gray, renderingMode: .alwaysOriginal)
-        nameLabel.text = model.name
-        if model.isNewSection {
-            addNewImageSectioin()
-        }
-        if let count = model.countInSection {
-            countInSection.text = String(count)
-            addCountInSection()
-        }
-    }
-    
     private func getBottomLayer() {
         let bottomLineLayer = CAShapeLayer()
         layer.addSublayer(bottomLineLayer)
@@ -148,5 +136,17 @@ class TableCollectionViewCell: UICollectionViewCell {
         bottomLineLayer.fillColor = nil
         bottomLineLayer.lineCap = .round
         
+    }
+    
+    func getModelToCell(this model: TableCellModel) {
+        icon.image = model.image.withTintColor(.gray, renderingMode: .alwaysOriginal)
+        nameLabel.text = model.name
+        if model.isNewSection {
+            addNewImageSectioin()
+        }
+        if let count = model.countInSection {
+            countInSection.text = count.numberFormatToStringOutput()
+            addCountInSection()
+        }
     }
 }
