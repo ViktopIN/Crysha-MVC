@@ -23,13 +23,18 @@ class MainCollectionViewCell: UICollectionViewCell {
     // topView
     private lazy var topView = addDefaultView()
     
-    // stackView in topView
+    // topStackView in topView
+    private lazy var topStackView = addDefaultStackView(with: .vertical,
+                                                        distribution: .fillEqually,
+                                                        and: 0)
     private lazy var priceLabel = addDefaultLabel(with: 10)
     
     private lazy var shortDescriptionLabel = addDefaultLabel(with: 10)
     
     // middleStackView
-    private lazy var middleStackView = addDefaultStackView(with: .horizontal, distribution: .fillProportionally, and: 0)
+    private lazy var middleStackView = addDefaultStackView(with: .horizontal,
+                                                           distribution: .fillProportionally,
+                                                           and: 0)
     
     private lazy var mainThumbnail = addDefaultImageView()
     
@@ -47,9 +52,8 @@ class MainCollectionViewCell: UICollectionViewCell {
     // secondMiddleView
     private lazy var secondMiddleView = addDefaultView()
     
-    private lazy var accountTypeImage = addDefaultImageView()
-    
     private lazy var accountType = addDefaultLabel(with: 10)
+    
     // bottomView
     private lazy var bottomView = addDefaultView()
     
@@ -61,6 +65,9 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupHierarchy()
+        setupLayout()
+        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -71,10 +78,25 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     private func setupHierarchy() {
         addSubview(parentStackView)
-        topView.addSubview(priceLabel)
-        topView.addSubview(shortDescriptionLabel)
         parentStackView.addArrangedSubview(topView)
+        parentStackView.addArrangedSubview(middleStackView)
+        parentStackView.addArrangedSubview(secondMiddleView)
+        parentStackView.addArrangedSubview(bottomView)
         
+        topView.addSubview(topStackView)
+        topStackView.addArrangedSubview(priceLabel)
+        topStackView.addArrangedSubview(shortDescriptionLabel)
+        
+        middleStackView.addArrangedSubview(mainThumbnail)
+        locationView.addSubview(locationLabelsStack)
+        locationLabelsStack.addArrangedSubview(inCityLocationLabel)
+        locationLabelsStack.addArrangedSubview(cityLocationLabel)
+        middleStackView.addArrangedSubview(locationView)
+        
+        secondMiddleView.addSubview(accountType)
+        
+        bottomView.addSubview(dateLabel)
+        bottomView.addSubview(viewsLabel)
     }
     
     private func setupLayout() {
@@ -97,7 +119,29 @@ class MainCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate(
             [
                 shortDescriptionLabel.leadingAnchor.constraint(equalTo: topView.leadingAnchor),
-                shortDescriptionLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor)
+                shortDescriptionLabel.topAnchor.constraint(equalTo: priceLabel.topAnchor)
+            ]
+        )
+        
+        NSLayoutConstraint.activate(
+            [
+                locationLabelsStack.leadingAnchor.constraint(equalTo: locationView.leadingAnchor),
+                locationLabelsStack.topAnchor.constraint(equalTo: locationView.topAnchor),
+                locationLabelsStack.trailingAnchor.constraint(equalTo: locationView.trailingAnchor)
+            ]
+        )
+        
+        NSLayoutConstraint.activate(
+            [
+                dateLabel.leadingAnchor.constraint(equalTo: secondMiddleView.leadingAnchor),
+                dateLabel.topAnchor.constraint(equalTo: secondMiddleView.topAnchor)
+            ]
+        )
+        
+        NSLayoutConstraint.activate(
+            [
+                accountType.leadingAnchor.constraint(equalTo: secondMiddleView.leadingAnchor),
+                accountType.topAnchor.constraint(equalTo: secondMiddleView.topAnchor)
             ]
         )
     }
@@ -116,8 +160,13 @@ class MainCollectionViewCell: UICollectionViewCell {
         inCityLocationLabel.text = model.inCityLocation
         cityLocationLabel.text = model.inCityLocation
         dateLabel.text = model.date
-        viewsLabel.text = String(model.views)
+        let viewImage = UIImage(systemName: "eye")
+        viewsLabel.attributedText = String(model.views).addImageToLabelString(this: viewImage,
+                                                                              textIsFirst: false)
         isHotOffer = model.isHotOffer
+        let accountTypeImage = UIImage(systemName: "person.text.rectangle.fill")
+        accountType.attributedText = String(model.accountType.rawValue).addImageToLabelString(this: accountTypeImage,
+                                                                                              textIsFirst: false)
     }
     
     private func addDefaultLabel(with fontSize: CGFloat) -> UILabel {
