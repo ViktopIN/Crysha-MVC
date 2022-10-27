@@ -16,4 +16,8 @@ extension Int {
         numberFormatter.numberStyle = .decimal
         return numberFormatter.string(from: self as NSNumber)
     }
+    
+    func addTenge() -> String? {
+        "\(String(self)) \u{20B8}"
+    }
 }

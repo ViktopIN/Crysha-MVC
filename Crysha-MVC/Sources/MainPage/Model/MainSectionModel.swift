@@ -13,7 +13,14 @@ struct MainSectionCellModel {
     let mainThumbnail: UIImage
     let inCityLocation: String
     let cityLocation: String
+    let accountType: AccountType
     let date: String
     let views: Int
-    
+    let isHotOffer: Bool = false
+}
+
+enum AccountType: String {
+    case specialist = "Специалист"
+    case company = "Компания"
+    case owner = "Хозяин недвижимости"
 }

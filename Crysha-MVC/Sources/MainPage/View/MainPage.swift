@@ -92,12 +92,12 @@ extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDe
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TableCollectionViewCell.reuseID,
                                                           for: indexPath) as! TableCollectionViewCell
-            cell.getModelToCell(this: TableCellModel.getModels()[indexPath.row])
+            cell.takeModelToCell(this: TableCellModel.getModels()[indexPath.row])
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TableCollectionViewCell.reuseID,
                                                       for: indexPath) as! TableCollectionViewCell
-        cell.getModelToCell(this: TableCellModel.getModels()[indexPath.section])
+        cell.takeModelToCell(this: TableCellModel.getModels()[indexPath.section])
         return cell
     }
     

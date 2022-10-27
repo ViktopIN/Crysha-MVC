@@ -138,7 +138,7 @@ class TableCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func getModelToCell(this model: TableCellModel) {
+    func takeModelToCell(this model: TableCellModel) {
         icon.image = model.image.withTintColor(.gray, renderingMode: .alwaysOriginal)
         nameLabel.text = model.name
         if model.isNewSection {
