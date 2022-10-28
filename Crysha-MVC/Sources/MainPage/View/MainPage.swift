@@ -9,6 +9,10 @@ import UIKit
 
 class MainPageViewController: UIViewController {
     
+    // MARK: - Properties -
+    
+    static let sectionHeaderElementKind = "section-header-element-kind"
+    
     // MARK: - Views -
     
     var collectionView: UICollectionView! = nil
@@ -32,6 +36,11 @@ class MainPageViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(TableCollectionViewCell.self,
                                  forCellWithReuseIdentifier: TableCollectionViewCell.reuseID)
+        collectionView.register(MainCollectionViewCell.self,
+                                 forCellWithReuseIdentifier: MainCollectionViewCell.reuseID)
+        collectionView.register(BottomCollecionViewHeader.self,
+                                forSupplementaryViewOfKind: MainPageViewController.sectionHeaderElementKind,
+                                withReuseIdentifier: BottomCollecionViewHeader.reuseID)
         self.collectionView = collectionView
     }
     
@@ -69,15 +78,23 @@ class MainPageViewController: UIViewController {
                 return section
             }
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                  heightDimension: .fractionalHeight(1/7))
+                                                  heightDimension: .fractionalWidth(3/4))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                   heightDimension: .fractionalHeight(3/8))
+                                                   heightDimension: .fractionalHeight(4/7))
+            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                    heightDimension: .absolute(44))
+            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: headerSize,
+                elementKind: MainPageViewController.sectionHeaderElementKind,
+                alignment: .top)
 
             let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
             let section = NSCollectionLayoutSection(group: group)
+            section.boundarySupplementaryItems = [sectionHeader]
+
             return section
         }
         return layout
@@ -95,10 +112,20 @@ extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDe
             cell.takeModelToCell(this: TableCellModel.getModels()[indexPath.row])
             return cell
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TableCollectionViewCell.reuseID,
-                                                      for: indexPath) as! TableCollectionViewCell
-        cell.takeModelToCell(this: TableCellModel.getModels()[indexPath.section])
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.reuseID,
+                                                      for: indexPath) as! MainCollectionViewCell
+        
+        cell.takeModelToCell(this: MainSectionCellModel.getModel()[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let supplementaryView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                                    withReuseIdentifier: BottomCollecionViewHeader.reuseID,
+                                                                                    for: indexPath) as? BottomCollecionViewHeader else { fatalError() }
+        return supplementaryView
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -106,7 +133,7 @@ extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDe
         if section == 0 {
             return TableCellModel.getModels().count
         }
-        return 0
+        return MainSectionCellModel.getModel().count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

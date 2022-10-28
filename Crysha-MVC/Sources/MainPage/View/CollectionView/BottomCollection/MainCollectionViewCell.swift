@@ -11,7 +11,7 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    let reuseID = "mainCollectionViewCell"
+    static let reuseID = "mainCollectionViewCell"
     var isHotOffer = false
     
     // MARK: - Views
@@ -67,7 +67,7 @@ class MainCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         setupHierarchy()
         setupLayout()
-        setupView()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -146,11 +146,6 @@ class MainCollectionViewCell: UICollectionViewCell {
         )
     }
     
-    private func setupView() {
-        let cellsBackgroundColor = isHotOffer ? UIColor(named: "hotMainCollectionCellsColor") : UIColor(named: "defaultMainCollectionCellsColor")
-        backgroundColor = cellsBackgroundColor
-    }
-    
     // MARK: - Methods
     
     func takeModelToCell(this model: MainSectionCellModel) {
@@ -163,7 +158,9 @@ class MainCollectionViewCell: UICollectionViewCell {
         let viewImage = UIImage(systemName: "eye")
         viewsLabel.attributedText = String(model.views).addImageToLabelString(this: viewImage,
                                                                               textIsFirst: false)
-        isHotOffer = model.isHotOffer
+        let cellsBackgroundColor = model.isHotOffer ? UIColor(named: "hotMainCollectionCellsColor") : UIColor(named: "defaultMainCollectionCellsColor")
+        backgroundColor = cellsBackgroundColor
+        
         let accountTypeImage = UIImage(systemName: "person.text.rectangle.fill")
         accountType.attributedText = String(model.accountType.rawValue).addImageToLabelString(this: accountTypeImage,
                                                                                               textIsFirst: false)

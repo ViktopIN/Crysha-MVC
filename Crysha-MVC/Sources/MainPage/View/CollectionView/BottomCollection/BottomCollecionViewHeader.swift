@@ -22,12 +22,19 @@ class BottomCollecionViewHeader: UICollectionReusableView {
         return label
     }()
     
+    private lazy var headerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "headerColor")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: - Initialiser
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         hierarchySetup()
-        layoutSetup()
+        layoutSetup() 
     }
     
     required init?(coder: NSCoder) {
@@ -37,19 +44,24 @@ class BottomCollecionViewHeader: UICollectionReusableView {
     // MARK: - Settings
     
     private func hierarchySetup() {
-        addSubview(headerLabel)
+        addSubview(headerView)
+        headerView.addSubview(headerLabel)
     }
     
     private func layoutSetup() {
         NSLayoutConstraint.activate(
             [
-                headerLabel.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
-                headerLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 28)
+                headerLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+                headerLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 28)
             ]
         )
-    }
-    
-    private func setupView() {
-        backgroundColor = UIColor(named: "headerColor")
-    }
+        
+        NSLayoutConstraint.activate(
+            [
+                headerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+                headerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+                headerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+                headerView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            ]
+        )    }
 }
