@@ -28,4 +28,19 @@ extension String {
         }
         return completeText
     }
+    
+    func superscriptIndex() -> NSMutableAttributedString? {
+        var previousCharacter = String()
+        var superscriptIndexString = NSMutableAttributedString()
+        for (n, i) in self.enumerated() {
+            if i == "2" && previousCharacter == "м" {
+                superscriptIndexString = NSMutableAttributedString(string: self)
+                superscriptIndexString.setAttributes([.baselineOffset: 10], range: NSRange(location: n, length: 1))
+                return superscriptIndexString
+            } else {
+                previousCharacter = String(i)
+            }
+        }
+        return nil
+    }
 }

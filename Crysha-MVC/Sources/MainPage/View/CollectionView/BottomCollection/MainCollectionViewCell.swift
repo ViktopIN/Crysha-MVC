@@ -155,7 +155,7 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     func takeModelToCell(this model: MainSectionCellModel) {
         priceLabel.text = model.price.addTenge()
-        shortDescriptionLabel.text = model.shortDescription
+        shortDescriptionLabel.attributedText = model.shortDescription.superscriptIndex()
         mainThumbnail.image = model.mainThumbnail
         inCityLocationLabel.text = model.inCityLocation
         cityLocationLabel.text = model.inCityLocation
