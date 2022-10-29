@@ -17,6 +17,7 @@ class BottomCollecionViewHeader: UICollectionReusableView {
 
     private lazy var headerLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.text = "Горячие предложения в Тацахстане"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -52,7 +53,7 @@ class BottomCollecionViewHeader: UICollectionReusableView {
         NSLayoutConstraint.activate(
             [
                 headerLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-                headerLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 28)
+                headerLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 30)
             ]
         )
         

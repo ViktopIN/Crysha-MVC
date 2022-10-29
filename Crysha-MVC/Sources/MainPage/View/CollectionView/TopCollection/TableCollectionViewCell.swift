@@ -56,13 +56,14 @@ class TableCollectionViewCell: UICollectionViewCell {
         hierarchySetup()
         layoutSetup()
         getBottomLayer()
+        contentView.backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Settings
+    // MARK: - Setting
     
     private func hierarchySetup() {
         contentView.addSubview(icon)
@@ -127,15 +128,14 @@ class TableCollectionViewCell: UICollectionViewCell {
         let bottomLineLayer = CAShapeLayer()
         layer.addSublayer(bottomLineLayer)
         let path = UIBezierPath()
-        path.move(to: CGPoint(x: 28 + 24 + 7.5, y: contentView.bounds.maxY))
-        path.addLine(to: CGPoint(x: contentView.bounds.maxX, y: contentView.bounds.maxY))
+        path.move(to: CGPoint(x: 28 + 24 + 7.5, y: contentView.bounds.minY))
+        path.addLine(to: CGPoint(x: contentView.bounds.maxX, y: contentView.bounds.minY))
         bottomLineLayer.path = path.cgPath
         bottomLineLayer.strokeColor = UIColor.lightGray.cgColor
         bottomLineLayer.lineWidth = 0.5
         bottomLineLayer.strokeEnd = 1
         bottomLineLayer.fillColor = nil
         bottomLineLayer.lineCap = .round
-        
     }
     
     func takeModelToCell(this model: TableCellModel) {

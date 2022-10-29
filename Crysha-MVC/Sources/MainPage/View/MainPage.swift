@@ -21,17 +21,17 @@ class MainPageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
+        configureCollectionView()
         setupHierarchy()
         setupLayout()
     }
     
     // MARK: - Settings -
     
-    private func configure() {
+    private func configureCollectionView() {
         let collectionView = UICollectionView(frame: view.frame,
                                               collectionViewLayout: getLayout())
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = UIColor(named: "headerColor")
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(TableCollectionViewCell.self,
@@ -73,18 +73,26 @@ class MainPageViewController: UIViewController {
                                                        heightDimension: .fractionalHeight(3/7))
 
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+                group.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                              leading: 0,
+                                                              bottom: 6,
+                                                              trailing: 0)
 
                 let section = NSCollectionLayoutSection(group: group)
                 return section
             }
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                  heightDimension: .fractionalWidth(3/4))
+                                                  heightDimension: .fractionalWidth(5/8))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 6,
+                                                         leading: 0,
+                                                         bottom: 6,
+                                                         trailing: 0)
 
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                   heightDimension: .fractionalHeight(4/7))
+                                                   heightDimension: .fractionalWidth(9/4))
             let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                    heightDimension: .absolute(44))
+                                                    heightDimension: .absolute(48))
             let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: headerSize,
                 elementKind: MainPageViewController.sectionHeaderElementKind,
@@ -110,11 +118,32 @@ extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDe
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TableCollectionViewCell.reuseID,
                                                           for: indexPath) as! TableCollectionViewCell
             cell.takeModelToCell(this: TableCellModel.getModels()[indexPath.row])
+            if indexPath.row == TableCellModel.getModels().count - 1 {
+                cell.layer.masksToBounds = false
+                cell.layer.shadowRadius = 3
+                cell.layer.shadowColor = UIColor.lightGray.cgColor
+                cell.layer.shadowOpacity = 0.8
+                cell.layer.masksToBounds = false
+                cell.layer.shadowOffset = .zero
+                cell.layer.shouldRasterize = true
+                cell.layer.rasterizationScale = UIScreen.main.scale
+                let shadowPath = UIBezierPath(rect: CGRect(x: 0,
+                                                           y: cell.bounds.maxY - cell.layer.shadowRadius ,
+                                                           width: cell.bounds.width,
+                                                           height: cell.layer.shadowRadius))
+                shadowPath.lineWidth = 3
+                cell.layer.shadowPath = shadowPath.cgPath
+            }
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.reuseID,
                                                       for: indexPath) as! MainCollectionViewCell
-        
+        cell.layer.masksToBounds = false
+        cell.layer.shadowRadius = 3
+        cell.layer.shadowColor = UIColor.lightGray.cgColor
+        cell.layer.shadowOpacity = 0.8
+        cell.layer.masksToBounds = false
+        cell.layer.shadowOffset = .zero
         cell.takeModelToCell(this: MainSectionCellModel.getModel()[indexPath.row])
         return cell
     }
