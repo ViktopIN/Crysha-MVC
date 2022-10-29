@@ -18,6 +18,7 @@ extension Int {
     }
     
     func addTenge() -> String? {
-        "\(String(self)) \u{20B8}"
+        let unsetString = self.numberFormatToStringOutput()
+        return "\(unsetString ?? "0") \u{20B8}"
     }
 }

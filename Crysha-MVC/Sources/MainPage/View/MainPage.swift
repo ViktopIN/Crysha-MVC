@@ -90,7 +90,7 @@ class MainPageViewController: UIViewController {
                                                          trailing: 0)
 
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                   heightDimension: .fractionalWidth(9/4))
+                                                   heightDimension: .fractionalWidth(15/8))
             let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                     heightDimension: .absolute(48))
             let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(

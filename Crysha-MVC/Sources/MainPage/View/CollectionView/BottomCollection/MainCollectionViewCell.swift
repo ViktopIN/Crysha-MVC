@@ -17,47 +17,56 @@ class MainCollectionViewCell: UICollectionViewCell {
     // MARK: - Views
     
     private lazy var parentStackView = addDefaultStackView(with: .vertical,
-                                                           distribution: .fillProportionally,
-                                                           and: 0)
+                                                           distribution: .fill,
+                                                           and: 7)
     
     // topStackView
     private lazy var topStackView = addDefaultStackView(with: .vertical,
-                                                        distribution: .fillEqually,
+                                                        distribution: .fill,
                                                         and: 0)
-    private lazy var priceLabel = addDefaultLabel(with: 10)
+    private lazy var priceLabel = addDefaultLabel(with: 16,
+                                                  fontWeight: .medium,
+                                                  and: .black)
     
-    private lazy var shortDescriptionLabel = addDefaultLabel(with: 10)
+    private lazy var shortDescriptionLabel = addDefaultLabel(with: 14,
+                                                             fontWeight: .medium,
+                                                             and: .link)
     
     // middleStackView
     private lazy var middleStackView = addDefaultStackView(with: .horizontal,
-                                                           distribution: .fillEqually,
-                                                           and: 0)
-    
+                                                           distribution: .fill,
+                                                           and: 7)
+
     private lazy var mainThumbnail = addDefaultImageView()
-    
+
     // locationLabelsStack in locationView. locationView in middleStackView
     private lazy var locationView = addDefaultView()
-   
-    private lazy var inCityLocationLabel = addDefaultLabel(with: 10)
-    
-    private lazy var cityLocationLabel = addDefaultLabel(with: 10)
-    
+
+    private lazy var inCityLocationLabel = addDefaultLabel(with: 14, fontWeight: .regular, and: .black)
+
+    private lazy var cityLocationLabel = addDefaultLabel(with: 14, fontWeight: .regular, and: .gray)
+
     // secondMiddleView
     private lazy var secondMiddleView = addDefaultView()
-    
-    private lazy var accountTypeLabel = addDefaultLabel(with: 10)
-    
+
+    private lazy var accountTypeLabel = addDefaultLabel(with: 14, fontWeight: .regular, and: .black)
+
     // bottomView
     private lazy var bottomView = addDefaultView()
-    
-    private lazy var dateLabel = addDefaultLabel(with: 10)
-    
-    private lazy var viewsLabel = addDefaultLabel(with: 10)
+
+    private lazy var dateLabel = addDefaultLabel(with: 14,
+                                                 fontWeight: .regular,
+                                                 and: .gray)
+
+    private lazy var viewsLabel = addDefaultLabel(with: 14,
+                                                  fontWeight: .regular,
+                                                  and: .gray)
     
     // MARK: - Initialise
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupView()
         setupHierarchy()
         setupLayout()
     }
@@ -67,6 +76,38 @@ class MainCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Settings
+    
+    private func setupView() {
+        parentStackView.isLayoutMarginsRelativeArrangement = true
+        parentStackView.layoutMargins = UIEdgeInsets(top: 8,
+                                                     left: 16,
+                                                     bottom: 0,
+                                                     right: 16)
+        
+        mainThumbnail.layer.masksToBounds = true
+        mainThumbnail.layer.cornerRadius = 5
+        
+        inCityLocationLabel.numberOfLines = 0
+        cityLocationLabel.numberOfLines = 0
+        
+        middleStackView.alignment = .fill
+        
+        // add line in bottomView
+        DispatchQueue.main.async {
+            let bottomLineLayer = CAShapeLayer()
+            self.bottomView.layer.addSublayer(bottomLineLayer)
+            let path = UIBezierPath()
+            path.move(to: CGPoint(x: self.bottomView.bounds.minX, y: self.bottomView.bounds.minY))
+            path.addLine(to: CGPoint(x: self.bottomView.bounds.maxX, y: self.bottomView.bounds.minY))
+            print(self.bottomView.bounds.maxX)
+            bottomLineLayer.path = path.cgPath
+            bottomLineLayer.strokeColor = UIColor.lightGray.cgColor
+            bottomLineLayer.lineWidth = 0.5
+            bottomLineLayer.strokeEnd = 1
+            bottomLineLayer.fillColor = nil
+            bottomLineLayer.lineCap = .round
+        }
+    }
     
     private func setupHierarchy() {
         contentView.addSubview(parentStackView)
@@ -101,103 +142,55 @@ class MainCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate(
             [
-                topStackView.topAnchor.constraint(equalTo: parentStackView.topAnchor),
-                topStackView.leadingAnchor.constraint(equalTo: parentStackView.leadingAnchor),
-                topStackView.trailingAnchor.constraint(equalTo: parentStackView.trailingAnchor),
-                topStackView.heightAnchor.constraint(equalToConstant: parentStackView.bounds.height * 2/7)
+                topStackView.heightAnchor.constraint(equalTo: parentStackView.heightAnchor, multiplier: 1/5)
             ]
         )
         
         NSLayoutConstraint.activate(
             [
-                priceLabel.topAnchor.constraint(equalTo: topStackView.topAnchor),
-                priceLabel.leadingAnchor.constraint(equalTo: topStackView.leadingAnchor),
-                priceLabel.trailingAnchor.constraint(equalTo: topStackView.trailingAnchor),
-                priceLabel.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor)
+                mainThumbnail.heightAnchor.constraint(equalTo: parentStackView.heightAnchor, multiplier: 3/7),
+                mainThumbnail.widthAnchor.constraint(equalTo: parentStackView.widthAnchor, multiplier: 2/5),
+                mainThumbnail.topAnchor.constraint(equalTo: middleStackView.topAnchor)
             ]
         )
         
         NSLayoutConstraint.activate(
             [
-                middleStackView.leadingAnchor.constraint(equalTo: parentStackView.leadingAnchor),
-                middleStackView.trailingAnchor.constraint(equalTo: parentStackView.trailingAnchor),
-                middleStackView.heightAnchor.constraint(equalToConstant: parentStackView.bounds.height * 3/7)
+                inCityLocationLabel.topAnchor.constraint(equalTo: middleStackView.topAnchor, constant: 3),
+                inCityLocationLabel.widthAnchor.constraint(equalTo: middleStackView.widthAnchor, multiplier: 5/9)
+            ]
+        )
+        
+        NSLayoutConstraint.activate(
+            [
+                cityLocationLabel.topAnchor.constraint(equalTo: inCityLocationLabel.bottomAnchor, constant: 7),
+                cityLocationLabel.widthAnchor.constraint(equalTo: middleStackView.widthAnchor, multiplier: 5/9)
+            ]
+        )
+        
+        NSLayoutConstraint.activate(
+            [
+                accountTypeLabel.heightAnchor.constraint(equalTo: parentStackView.heightAnchor, multiplier: 1/10)
+            ]
+        )
+        
+        NSLayoutConstraint.activate(
+            [
+                secondMiddleView.heightAnchor.constraint(equalTo: accountTypeLabel.heightAnchor)
+            ]
+        )
+        
+        NSLayoutConstraint.activate(
+            [
+                dateLabel.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 7)
             ]
         )
 
-        NSLayoutConstraint.activate(
-            [
-                mainThumbnail.leadingAnchor.constraint(equalTo: middleStackView.leadingAnchor),
-                mainThumbnail.topAnchor.constraint(equalTo: middleStackView.topAnchor),
-                mainThumbnail.bottomAnchor.constraint(equalTo: middleStackView.bottomAnchor)
-            ]
-        )
-
-        NSLayoutConstraint.activate(
-            [
-                locationView.trailingAnchor.constraint(equalTo: middleStackView.trailingAnchor),
-                locationView.topAnchor.constraint(equalTo: middleStackView.topAnchor),
-                locationView.bottomAnchor.constraint(equalTo: middleStackView.bottomAnchor)
-            ]
-        )
-
-        NSLayoutConstraint.activate(
-            [
-                inCityLocationLabel.leadingAnchor.constraint(equalTo: locationView.leadingAnchor),
-                inCityLocationLabel.trailingAnchor.constraint(equalTo: locationView.trailingAnchor),
-                inCityLocationLabel.topAnchor.constraint(equalTo: locationView.topAnchor),
-                inCityLocationLabel.heightAnchor.constraint(equalTo: locationView.heightAnchor, multiplier: 1/5)
-            ]
-        )
-
-        NSLayoutConstraint.activate(
-            [
-                cityLocationLabel.leadingAnchor.constraint(equalTo: locationView.leadingAnchor),
-                cityLocationLabel.trailingAnchor.constraint(equalTo: locationView.trailingAnchor),
-                cityLocationLabel.topAnchor.constraint(equalTo: inCityLocationLabel.bottomAnchor),
-                cityLocationLabel.heightAnchor.constraint(equalTo: locationView.heightAnchor, multiplier: 1/5)
-            ]
-        )
         
         NSLayoutConstraint.activate(
             [
-                secondMiddleView.leadingAnchor.constraint(equalTo: parentStackView.leadingAnchor),
-                secondMiddleView.trailingAnchor.constraint(equalTo: parentStackView.trailingAnchor),
-                secondMiddleView.heightAnchor.constraint(equalToConstant: parentStackView.bounds.height * 1/7)
-            ]
-        )
-        
-        NSLayoutConstraint.activate(
-            [
-                accountTypeLabel.leadingAnchor.constraint(equalTo: secondMiddleView.leadingAnchor),
-                accountTypeLabel.trailingAnchor.constraint(equalTo: secondMiddleView.trailingAnchor),
-                accountTypeLabel.topAnchor.constraint(equalTo: secondMiddleView.topAnchor),
-                accountTypeLabel.widthAnchor.constraint(equalTo: secondMiddleView.widthAnchor, multiplier: 1/4)
-            ]
-        )
-        
-        NSLayoutConstraint.activate(
-            [
-                bottomView.leadingAnchor.constraint(equalTo: parentStackView.leadingAnchor),
-                bottomView.trailingAnchor.constraint(equalTo: parentStackView.trailingAnchor),
-                bottomView.bottomAnchor.constraint(equalTo: parentStackView.bottomAnchor),
-                bottomView.heightAnchor.constraint(equalToConstant: parentStackView.bounds.height * 1/7)
-            ]
-        )
-        
-        NSLayoutConstraint.activate(
-            [
-                dateLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor),
-                dateLabel.topAnchor.constraint(equalTo: bottomView.topAnchor),
-                dateLabel.heightAnchor.constraint(equalTo: bottomView.heightAnchor),
-            ]
-        )
-        
-        NSLayoutConstraint.activate(
-            [
-                viewsLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor),
-                viewsLabel.topAnchor.constraint(equalTo: bottomView.topAnchor),
-                viewsLabel.heightAnchor.constraint(equalTo: bottomView.heightAnchor),
+                viewsLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 15),
+                viewsLabel.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 7)
             ]
         )
     }
@@ -222,9 +215,12 @@ class MainCollectionViewCell: UICollectionViewCell {
                                                                                               textIsFirst: false)
     }
     
-    private func addDefaultLabel(with fontSize: CGFloat) -> UILabel {
+    private func addDefaultLabel(with fontSize: CGFloat,
+                                 fontWeight: UIFont.Weight,
+                                 and fontColor: UIColor) -> UILabel {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: fontSize)
+        label.font = UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
+        label.textColor = fontColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }

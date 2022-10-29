@@ -11,7 +11,7 @@ extension String {
     func addImageToLabelString(this image: UIImage?,
                                textIsFirst: Bool) -> NSAttributedString {
         let imageAttachment = NSTextAttachment()
-               imageAttachment.image = image
+        imageAttachment.image = image?.withTintColor(.gray, renderingMode: .alwaysOriginal)
         let completeText = NSMutableAttributedString(string: "")
         let text = NSAttributedString(string: self)
         let space = NSAttributedString(string: "  ")
@@ -35,7 +35,8 @@ extension String {
         for (n, i) in self.enumerated() {
             if i == "2" && previousCharacter == "м" {
                 superscriptIndexString = NSMutableAttributedString(string: self)
-                superscriptIndexString.setAttributes([.baselineOffset: 10], range: NSRange(location: n, length: 1))
+                superscriptIndexString.setAttributes([.font: UIFont.systemFont(ofSize: 12),
+                    .baselineOffset: 7], range: NSRange(location: n, length: 1))
                 return superscriptIndexString
             } else {
                 previousCharacter = String(i)
