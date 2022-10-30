@@ -9,6 +9,11 @@ import UIKit
 
 class ItemPageViewController: UIViewController {
     
+    // MARK: - Properties
+    
+    var mainPageViewController: UIViewController = MainPageViewController()
+    var viewItem: ItemPageView!
+    
     // MARK: - View
     
     private var itemPageView: ItemPageView? {
@@ -24,6 +29,16 @@ class ItemPageViewController: UIViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     // MARK: - Settings
     private func setupHierarchy() {
         
@@ -34,6 +49,19 @@ class ItemPageViewController: UIViewController {
     }
     
     private func setupView() {
-        view = ItemPageView()
+        view = viewItem
+        navigationController?.navigationBar.isHidden = true
+        navigationItem.setHidesBackButton(true, animated: false)
+        tabBarController?.tabBar.isHidden = true
     }
 }
+
+// MARK: - Extensions
+
+extension ItemPageViewController: ItemPageViewControllerProtocol {
+    
+    func goBack() {
+        navigationController?.popToViewController(mainPageViewController, animated: true)
+    }
+}
+

@@ -15,7 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let krishaViewController = UINavigationController(rootViewController: MainPageViewController())
+        let mainPage = assemblyViewControllers()
+
+        let krishaViewController = UINavigationController(rootViewController: mainPage)
         krishaViewController.navigationItem.hidesBackButton = true
         self.setNavigationControllerBackgroundColor("navigationControllerColor")
         let krishaViewControllerItemModel = TabBarItemModel(title: "Krisha.kz",
@@ -53,5 +55,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         return true
+    }
+    
+    func assemblyViewControllers() -> UIViewController {
+        let mainPage = MainPageViewController()
+        let itemPage = ItemPageViewController()
+        mainPage.itemPageViewController = itemPage
+        itemPage.mainPageViewController = mainPage
+        let itemView = ItemPageView(frame: .zero, controller: itemPage)
+        itemPage.viewItem = itemView
+        return mainPage
     }
 }

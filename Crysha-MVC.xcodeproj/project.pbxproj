@@ -20,6 +20,7 @@
 		84B5AC76290AE7A1004EE8BE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B5AC75290AE7A1004EE8BE /* StringExtension.swift */; };
 		84B71281290E9F4A00AD6AD5 /* ItemPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B71280290E9F4A00AD6AD5 /* ItemPageViewController.swift */; };
 		84B71283290EA39100AD6AD5 /* ItemPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B71282290EA39100AD6AD5 /* ItemPageView.swift */; };
+		84B71287290EB1CC00AD6AD5 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B71286290EB1CC00AD6AD5 /* Protocols.swift */; };
 		84D35B5B290192D500BB17F3 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B5A290192D500BB17F3 /* FavoritesViewController.swift */; };
 		84D35B5D290192D600BB17F3 /* ApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B5C290192D600BB17F3 /* ApplyViewController.swift */; };
 		84D35B5F290192D700BB17F3 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B5E290192D700BB17F3 /* MessagesViewController.swift */; };
@@ -49,6 +50,7 @@
 		84B5AC75290AE7A1004EE8BE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		84B71280290E9F4A00AD6AD5 /* ItemPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPageViewController.swift; sourceTree = "<group>"; };
 		84B71282290EA39100AD6AD5 /* ItemPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPageView.swift; sourceTree = "<group>"; };
+		84B71286290EB1CC00AD6AD5 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		84D35B5A290192D500BB17F3 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		84D35B5C290192D600BB17F3 /* ApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyViewController.swift; sourceTree = "<group>"; };
 		84D35B5E290192D700BB17F3 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
@@ -183,11 +185,20 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		84B71284290EB1BB00AD6AD5 /* ProtocolsAndAssembly */ = {
+			isa = PBXGroup;
+			children = (
+				84B71286290EB1CC00AD6AD5 /* Protocols.swift */,
+			);
+			path = ProtocolsAndAssembly;
+			sourceTree = "<group>";
+		};
 		84D35B572901916100BB17F3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				84B7127C290E9EFC00AD6AD5 /* ItemPage */,
+				84B71284290EB1BB00AD6AD5 /* ProtocolsAndAssembly */,
 				84D35B7329059D9B00BB17F3 /* MainPage */,
+				84B7127C290E9EFC00AD6AD5 /* ItemPage */,
 				84D35B652901DCB900BB17F3 /* TabBarController */,
 				84D35B622901940A00BB17F3 /* Extensions */,
 				84D35B592901929300BB17F3 /* Application */,
@@ -344,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84B71281290E9F4A00AD6AD5 /* ItemPageViewController.swift in Sources */,
+				84B71287290EB1CC00AD6AD5 /* Protocols.swift in Sources */,
 				8478213D28FD3C0E00BC1F7F /* MainPageViewController.swift in Sources */,
 				84549A022908027F00679A39 /* MainCollectionViewCell.swift in Sources */,
 				84D35B6C29053D5000BB17F3 /* AppDelegateExtension.swift in Sources */,

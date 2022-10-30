@@ -12,13 +12,15 @@ class MainPageViewController: UIViewController {
     // MARK: - Properties -
     
     static let sectionHeaderElementKind = "section-header-element-kind"
+    var itemPageViewController: UIViewController!
+
     
     // MARK: - Views -
     
     var collectionView: UICollectionView! = nil
     
     // MARK: - Initialisation -
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
@@ -173,10 +175,10 @@ extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDe
 extension MainPageViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            let vc = ItemPageViewController()
-            navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(itemPageViewController, animated: true)
             
         }
     }
 }
+
 
