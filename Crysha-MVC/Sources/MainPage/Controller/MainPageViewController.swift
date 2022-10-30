@@ -109,7 +109,7 @@ class MainPageViewController: UIViewController {
     }
 }
 
-// MARK: - Extension Datasource
+// MARK: - Extension Datasource and Delegate
 
 extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
@@ -167,6 +167,16 @@ extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
+    }
+}
+
+extension MainPageViewController {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let vc = ItemPageViewController()
+            navigationController?.pushViewController(vc, animated: true)
+            
+        }
     }
 }
 

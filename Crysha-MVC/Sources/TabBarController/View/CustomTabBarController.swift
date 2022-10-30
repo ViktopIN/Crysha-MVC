@@ -53,7 +53,7 @@ class CustomTabBarController: UITabBarController {
                     returnVCArray.append(setBarItem(viewController,
                                                     tabBarItemModel: amountTabBarItemsModels[n]))
                 } else {
-                    amountTabBarItemsModels[n].normalColor = .blue
+                    amountTabBarItemsModels[n].normalColor = .link
                     returnVCArray.append(setBarItem(viewController,
                                                     tabBarItemModel: amountTabBarItemsModels[n]))
                 }

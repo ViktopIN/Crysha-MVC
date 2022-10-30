@@ -22,7 +22,7 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     // topStackView
     private lazy var topStackView = addDefaultStackView(with: .vertical,
-                                                        distribution: .fill,
+                                                        distribution: .equalCentering,
                                                         and: 0)
     private lazy var priceLabel = addDefaultLabel(with: 16,
                                                   fontWeight: .medium,
@@ -84,6 +84,8 @@ class MainCollectionViewCell: UICollectionViewCell {
                                                      bottom: 0,
                                                      right: 16)
         
+        shortDescriptionLabel.numberOfLines = 0
+        
         mainThumbnail.layer.masksToBounds = true
         mainThumbnail.layer.cornerRadius = 5
         
@@ -99,7 +101,6 @@ class MainCollectionViewCell: UICollectionViewCell {
             let path = UIBezierPath()
             path.move(to: CGPoint(x: self.bottomView.bounds.minX, y: self.bottomView.bounds.minY))
             path.addLine(to: CGPoint(x: self.bottomView.bounds.maxX, y: self.bottomView.bounds.minY))
-            print(self.bottomView.bounds.maxX)
             bottomLineLayer.path = path.cgPath
             bottomLineLayer.strokeColor = UIColor.lightGray.cgColor
             bottomLineLayer.lineWidth = 0.5
@@ -142,7 +143,7 @@ class MainCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate(
             [
-                topStackView.heightAnchor.constraint(equalTo: parentStackView.heightAnchor, multiplier: 1/5)
+                priceLabel.heightAnchor.constraint(equalTo: parentStackView.heightAnchor, multiplier: 1/10)
             ]
         )
         
