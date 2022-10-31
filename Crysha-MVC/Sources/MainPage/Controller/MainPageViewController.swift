@@ -28,6 +28,12 @@ class MainPageViewController: UIViewController {
         setupLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     // MARK: - Settings -
     
     private func configureCollectionView() {
@@ -146,7 +152,7 @@ extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDe
         cell.layer.shadowOpacity = 0.8
         cell.layer.masksToBounds = false
         cell.layer.shadowOffset = .zero
-        cell.takeModelToCell(this: MainSectionCellModel.getModel()[indexPath.row])
+        cell.takeModelToCell(this: MainModel.getModel()[indexPath.row])
         return cell
     }
     
@@ -164,7 +170,7 @@ extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDe
         if section == 0 {
             return TableCellModel.getModels().count
         }
-        return MainSectionCellModel.getModel().count
+        return MainModel.getModel().count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

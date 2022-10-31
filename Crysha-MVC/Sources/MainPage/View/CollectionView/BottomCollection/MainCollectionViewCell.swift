@@ -198,10 +198,10 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Methods
     
-    func takeModelToCell(this model: MainSectionCellModel) {
+    func takeModelToCell(this model: MainModel) {
         priceLabel.text = model.price.addTenge()
         shortDescriptionLabel.attributedText = model.shortDescription.superscriptIndex()
-        mainThumbnail.image = model.mainThumbnail
+        mainThumbnail.image = model.mainThumbnail[0]
         inCityLocationLabel.text = model.inCityLocation
         cityLocationLabel.text = model.cityLocation
         dateLabel.text = model.date

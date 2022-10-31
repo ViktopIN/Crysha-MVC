@@ -11,6 +11,7 @@ class ItemPageView: UIView {
     
     // MARK: - Properties
     
+    
     weak var controller: ItemPageViewControllerProtocol!
     var mainPageViewController: UIViewController!
     
@@ -31,6 +32,14 @@ class ItemPageView: UIView {
         return button
     }()
     
+    private var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    private var imageViewSwiper: UICollectionView!
+    
     // MARK: - Initialiser
     
     init(frame: CGRect, controller: ItemPageViewControllerProtocol) {
@@ -48,7 +57,8 @@ class ItemPageView: UIView {
     // MARK: - Settings
     
     private func setupHierarchy() {
-       addSubview(backButton)
+        addSubview(scrollView)
+        addSubview(backButton)
     }
     
     private func setupLayout() {
@@ -60,6 +70,15 @@ class ItemPageView: UIView {
                 backButton.widthAnchor.constraint(equalTo: backButton.heightAnchor)
             ]
         )
+        NSLayoutConstraint.activate(
+            [
+                scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                scrollView.topAnchor.constraint(equalTo: topAnchor),
+                scrollView.heightAnchor.constraint(equalTo: heightAnchor)
+            ]
+        )
+        
     }
     
     private func setupView() {
