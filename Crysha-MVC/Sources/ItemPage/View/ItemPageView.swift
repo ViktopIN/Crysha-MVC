@@ -45,9 +45,9 @@ class ItemPageView: UIView {
     init(frame: CGRect, controller: ItemPageViewControllerProtocol) {
         super.init(frame: .zero)
         self.controller = controller
-        setupView()
         setupHierarchy()
         setupLayout()
+        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -97,7 +97,7 @@ class ItemPageView: UIView {
                 imageViewSwiper.topAnchor.constraint(equalTo: topAnchor),
                 imageViewSwiper.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
                 imageViewSwiper.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-                imageViewSwiper.heightAnchor.constraint(equalTo: scrollView.widthAnchor)
+                imageViewSwiper.heightAnchor.constraint(equalTo: scrollView.widthAnchor, constant: 60)
             ]
         )
     }

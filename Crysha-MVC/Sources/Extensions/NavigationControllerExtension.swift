@@ -15,7 +15,7 @@ extension UINavigationController {
     }
     
     func insertImage() {
-        let image = UIImageView(image: UIImage(named: "leftItemNavigationControllerImage"))
+        let image = UIImageView(image: UIImage(named: "logo"))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.contentsRect = CGRect(x: 0.134, y: 0.18, width: 0.73, height: 0.63)
         image.layer.contentsGravity = .resizeAspectFill
