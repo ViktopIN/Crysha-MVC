@@ -38,7 +38,7 @@ class ItemPageView: UIView {
         return scrollView
     }()
     
-    private var imageViewSwiper: UICollectionView!
+    var imageViewSwiper: UICollectionView!
     
     // MARK: - Initialiser
     
@@ -78,7 +78,6 @@ class ItemPageView: UIView {
                 scrollView.heightAnchor.constraint(equalTo: heightAnchor)
             ]
         )
-        
     }
     
     private func setupView() {
@@ -89,6 +88,18 @@ class ItemPageView: UIView {
     
     @objc func goBack() {
         controller.goBack()
+    }
+    
+    func configureImageSwiper() {
+        scrollView.addSubview(imageViewSwiper)
+        NSLayoutConstraint.activate(
+            [
+                imageViewSwiper.topAnchor.constraint(equalTo: topAnchor),
+                imageViewSwiper.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+                imageViewSwiper.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+                imageViewSwiper.heightAnchor.constraint(equalTo: scrollView.widthAnchor)
+            ]
+        )
     }
 }
 

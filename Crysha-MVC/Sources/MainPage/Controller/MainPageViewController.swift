@@ -30,8 +30,7 @@ class MainPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = false
-        tabBarController?.tabBar.isHidden = false
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     // MARK: - Settings -

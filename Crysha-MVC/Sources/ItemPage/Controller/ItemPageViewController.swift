@@ -13,6 +13,7 @@ class ItemPageViewController: UIViewController {
     
     var mainPageViewController: UIViewController = MainPageViewController()
     var viewItem: ItemPageView!
+    var dataSource = MainModel.getModel()
     
     // MARK: - View
     
@@ -31,14 +32,7 @@ class ItemPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
-        tabBarController?.tabBar.isHidden = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        navigationController?.navigationBar.isHidden = false
-//        tabBarController?.tabBar.isHidden = false
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     // MARK: - Settings
@@ -47,7 +41,9 @@ class ItemPageViewController: UIViewController {
     }
     
     private func setupLayout() {
-        
+        DispatchQueue.main.async {
+            self.configureImageSwiper()
+        }
     }
     
     private func setupView() {
@@ -55,6 +51,30 @@ class ItemPageViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         navigationItem.setHidesBackButton(true, animated: false)
         tabBarController?.tabBar.isHidden = true
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    // MARK: - Methods
+    
+    private func configureImageSwiper() {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: generateLayout())
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(ImageViewSwiperCell.self, forCellWithReuseIdentifier: ImageViewSwiperCell.reuseID)
+        itemPageView?.imageViewSwiper = collectionView
+        itemPageView?.configureImageSwiper()
+    }
+    
+    private func generateLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPaging
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
     }
 }
 
@@ -65,5 +85,19 @@ extension ItemPageViewController: ItemPageViewControllerProtocol {
     func goBack() {
         navigationController?.popToViewController(mainPageViewController, animated: true)
     }
+}
+
+extension ItemPageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataSource[0].mainThumbnail.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageViewSwiperCell.reuseID, for: indexPath) as! ImageViewSwiperCell
+        cell.setCell(image: dataSource[0].mainThumbnail[indexPath.row])
+        return cell
+    }
+    
+    
 }
 

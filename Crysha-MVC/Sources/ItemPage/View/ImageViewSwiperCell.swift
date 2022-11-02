@@ -17,7 +17,8 @@ class ImageViewSwiperCell: UICollectionViewCell {
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -44,10 +45,16 @@ class ImageViewSwiperCell: UICollectionViewCell {
         NSLayoutConstraint.activate(
             [
                 imageView.topAnchor.constraint(equalTo: topAnchor),
-                imageView.topAnchor.constraint(equalTo: topAnchor),
-                imageView.topAnchor.constraint(equalTo: topAnchor),
-                imageView.topAnchor.constraint(equalTo: topAnchor)
+                imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
             ]
         )
+    }
+    
+    // MARK: - Methods
+    
+    func setCell(image: UIImage?) {
+        imageView.image = image
     }
 }
