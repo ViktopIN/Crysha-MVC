@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let mainPage = assemblyViewControllers()
 
-        let krishaViewController = CryshasMainNavigationController(rootViewController: mainPage)
+        let krishaViewController = UINavigationController(rootViewController: mainPage)
         let krishaViewControllerItemModel = TabBarItemModel(title: "Krisha.kz",
                                                             imageName: "house.circle.fill",
                                                             tag: 0)

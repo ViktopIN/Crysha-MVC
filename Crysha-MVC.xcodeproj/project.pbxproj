@@ -18,8 +18,6 @@
 		8478213D28FD3C0E00BC1F7F /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478213C28FD3C0E00BC1F7F /* MainPageViewController.swift */; };
 		8478214228FD3C0F00BC1F7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8478214128FD3C0F00BC1F7F /* Assets.xcassets */; };
 		8478214528FD3C0F00BC1F7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8478214328FD3C0F00BC1F7F /* LaunchScreen.storyboard */; };
-		8482ADBE2934FA6800FD092E /* CryshasMainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8482ADBD2934FA6800FD092E /* CryshasMainNavigationController.swift */; };
-		848C2517292E322A00EBD67D /* GCDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C2516292E322A00EBD67D /* GCDExtension.swift */; };
 		84B5AC76290AE7A1004EE8BE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B5AC75290AE7A1004EE8BE /* StringExtension.swift */; };
 		84B71281290E9F4A00AD6AD5 /* ItemPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B71280290E9F4A00AD6AD5 /* ItemPageViewController.swift */; };
 		84B71283290EA39100AD6AD5 /* ItemPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B71282290EA39100AD6AD5 /* ItemPageView.swift */; };
@@ -50,8 +48,6 @@
 		8478214128FD3C0F00BC1F7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8478214428FD3C0F00BC1F7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8478214628FD3C0F00BC1F7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8482ADBD2934FA6800FD092E /* CryshasMainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryshasMainNavigationController.swift; sourceTree = "<group>"; };
-		848C2516292E322A00EBD67D /* GCDExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDExtension.swift; sourceTree = "<group>"; };
 		84B5AC75290AE7A1004EE8BE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		84B71280290E9F4A00AD6AD5 /* ItemPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPageViewController.swift; sourceTree = "<group>"; };
 		84B71282290EA39100AD6AD5 /* ItemPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPageView.swift; sourceTree = "<group>"; };
@@ -79,13 +75,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		34C673EC1AE297094E0A4BFA /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		845499F52907F31C00679A39 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,7 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				845499F52907F31C00679A39 /* CollectionView */,
-				8482ADBD2934FA6800FD092E /* CryshasMainNavigationController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -134,7 +122,6 @@
 			children = (
 				8478213728FD3C0E00BC1F7F /* Crysha-MVC */,
 				8478213628FD3C0E00BC1F7F /* Products */,
-				34C673EC1AE297094E0A4BFA /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -246,7 +233,6 @@
 				84549A032909844500679A39 /* IntegerExtension.swift */,
 				84B5AC75290AE7A1004EE8BE /* StringExtension.swift */,
 				8467F00829293F4900132E1B /* UIColorExtensions.swift */,
-				848C2516292E322A00EBD67D /* GCDExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -374,9 +360,7 @@
 				84549A022908027F00679A39 /* MainCollectionViewCell.swift in Sources */,
 				84D35B6C29053D5000BB17F3 /* AppDelegateExtension.swift in Sources */,
 				84B71283290EA39100AD6AD5 /* ItemPageView.swift in Sources */,
-				8482ADBE2934FA6800FD092E /* CryshasMainNavigationController.swift in Sources */,
 				84D35B5B290192D500BB17F3 /* FavoritesViewController.swift in Sources */,
-				848C2517292E322A00EBD67D /* GCDExtension.swift in Sources */,
 				84D35B672901DCD700BB17F3 /* CustomTabBarController.swift in Sources */,
 				84549A042909844600679A39 /* IntegerExtension.swift in Sources */,
 				84D35B61290192D800BB17F3 /* AccountViewController.swift in Sources */,

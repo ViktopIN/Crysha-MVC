@@ -137,7 +137,6 @@ extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDe
                 cell.layer.shadowRadius = 3
                 cell.layer.shadowColor = UIColor.lightGray.cgColor
                 cell.layer.shadowOpacity = 0.8
-                cell.layer.masksToBounds = false
                 cell.layer.shadowOffset = .zero
                 cell.layer.shouldRasterize = true
                 cell.layer.rasterizationScale = UIScreen.main.scale

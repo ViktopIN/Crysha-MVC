@@ -156,6 +156,20 @@ class ItemPageView: UIView {
     private lazy var callContactButton = addContactButtons(with: Strings.callContactButtonLabelTitle,
                                                               and: UIColor.customGreen)
     
+    private lazy var appearedCustomNavigationBar: UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.layer.shadowRadius = 3
+        view.layer.shadowColor = UIColor.lightGray.cgColor
+        view.layer.shadowOpacity = 0.8
+        view.layer.shadowOffset = .zero
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        view.alpha = 0
+        return view
+    }()
+    
     // MARK: - Initialiser
     
     init(frame: CGRect, controller: ItemPageViewControllerProtocol) {
@@ -182,12 +196,13 @@ class ItemPageView: UIView {
         addSubview(contactsButtonStackView)
         contactsButtonStackView.addArrangedSubview(messageContactButton)
         contactsButtonStackView.addArrangedSubview(callContactButton)
+        addSubview(appearedCustomNavigationBar)
     }
     
     private func setupLayout() {
         NSLayoutConstraint.activate(
             [
-                backButton.topAnchor.constraint(equalTo: topAnchor, constant: 60),
+                backButton.topAnchor.constraint(equalTo: topAnchor, constant: 50),
                 backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
                 backButton.heightAnchor.constraint(equalToConstant: Metrics.backButtonsDiameter),
                 backButton.widthAnchor.constraint(equalTo: backButton.heightAnchor)
@@ -260,6 +275,16 @@ class ItemPageView: UIView {
         labelStackView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         labelStackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         labelStackView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor).isActive = true
+        
+        NSLayoutConstraint.activate(
+            [
+                appearedCustomNavigationBar.leadingAnchor.constraint(equalTo: leadingAnchor),
+                appearedCustomNavigationBar.topAnchor.constraint(equalTo: topAnchor),
+                appearedCustomNavigationBar.trailingAnchor.constraint(equalTo: trailingAnchor),
+                appearedCustomNavigationBar.heightAnchor.constraint(equalToConstant: Metrics.screenHeight * 1/10)
+            ]
+        )
+
     }
     
     private func setupView() {
@@ -422,6 +447,11 @@ class ItemPageView: UIView {
     
     func configureScrollViewDelegate() -> UIScrollView {
         return mainScrollView
+    }
+    
+    func configureAppearingOfAppearingView(opacityValue: CGFloat) {
+        appearedCustomNavigationBar.isHidden = false
+        appearedCustomNavigationBar.alpha = opacityValue
     }
     
     // MARK: - Private Methods
