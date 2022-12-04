@@ -18,7 +18,7 @@ class BottomCollecionViewHeader: UICollectionReusableView {
     private lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "Горячие предложения в Тацахстане"
+        label.text = "Горячие предложения в Лапландии"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

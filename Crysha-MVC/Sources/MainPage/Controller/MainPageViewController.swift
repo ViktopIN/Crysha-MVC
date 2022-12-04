@@ -13,7 +13,6 @@ class MainPageViewController: UIViewController {
     
     static let sectionHeaderElementKind = "section-header-element-kind"
     var itemPageViewController: UIViewController!
-
     
     // MARK: - Views -
     
@@ -26,6 +25,7 @@ class MainPageViewController: UIViewController {
         configureCollectionView()
         setupHierarchy()
         setupLayout()
+        configureNavigationController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +35,12 @@ class MainPageViewController: UIViewController {
     }
     
     // MARK: - Settings -
+    
+    private func configureNavigationController() {
+        let backBarButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backBarButton
+
+    }
     
     private func configureCollectionView() {
         let collectionView = UICollectionView(frame: view.frame,

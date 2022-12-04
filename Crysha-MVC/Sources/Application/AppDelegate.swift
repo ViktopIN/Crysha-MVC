@@ -17,9 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let mainPage = assemblyViewControllers()
 
-        let krishaViewController = UINavigationController(rootViewController: mainPage)
-        krishaViewController.navigationItem.hidesBackButton = true
-        self.setNavigationControllerBackgroundColor("navigationControllerColor")
+        let krishaViewController = CryshasMainNavigationController(rootViewController: mainPage)
         let krishaViewControllerItemModel = TabBarItemModel(title: "Krisha.kz",
                                                             imageName: "house.circle.fill",
                                                             tag: 0)

@@ -17,93 +17,41 @@ class ItemPageViewController: UIViewController {
         static let panel = "sharedAndFavoritesPanelReusableView"
     }
     var mainPageViewController: UIViewController = MainPageViewController()
+    private var mainScrollView: UIScrollView!
     var viewItem: ItemPageView!
     private var dataSource = MainModel.getModel()
     
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupHierarchy()
-        setupLayout()
         setupView()
+    }
+    
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //navigationItem.hidesBackButton = true
         navigationController?.setNavigationBarHidden(true, animated: true)
         tabBarController?.tabBar.isHidden = true
     }
-    
-    // MARK: - Settings
-    private func setupHierarchy() {
         
-    }
-    
-    private func setupLayout() {
-        DispatchQueue.main.async {
-            self.configureImageSwiper()
-        }
-    }
+    // MARK: - Settings
     
     private func setupView() {
         view = viewItem
-    }
-    
-    // MARK: - Methods
-    
-    private func configureImageSwiper() {
-        let collectionView = UICollectionView(frame: .zero,
-                                              collectionViewLayout: generateLayout())
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(ImageViewSwiperCell.self,
-                                forCellWithReuseIdentifier: ImageViewSwiperCell.reuseID)
-        collectionView.register(LogoReusableView.self,
-                                forSupplementaryViewOfKind: Supplementary.logo,
-                                withReuseIdentifier: LogoReusableView.reuseID)
-        collectionView.register(ImageCounterReusableView.self,
-                                forSupplementaryViewOfKind: Supplementary.counter,
-                                withReuseIdentifier: ImageCounterReusableView.reuseID)
-        collectionView.register(SharedAndFavoritesPanelReusableView.self,
-                                forSupplementaryViewOfKind: Supplementary.panel,
-                                withReuseIdentifier: SharedAndFavoritesPanelReusableView.reuseID)
-        viewItem.imageViewSwiper = collectionView
-        viewItem.configureImageSwiper()
-    }
-    
-    private func generateLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalWidth(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let counterAnchor = NSCollectionLayoutAnchor(edges: [.trailing, .bottom],
-                                                     fractionalOffset: CGPoint(x: -0.5, y: -0.5))
-        let counterSize = NSCollectionLayoutSize(widthDimension: .absolute(40),
-                                                 heightDimension: .absolute(24))
-        let counter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: counterSize,
-                                                                  elementKind: Supplementary.counter,
-                                                                  containerAnchor: counterAnchor)
-        let logoAnchor = NSCollectionLayoutAnchor(edges: [.leading, .bottom],
-                                                  fractionalOffset: CGPoint(x: 0.25, y: 0.5))
-        let logoSize = NSCollectionLayoutSize(widthDimension: .absolute(80),
-                                              heightDimension: .absolute(80))
-        let logo = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: logoSize,
-                                                               elementKind: Supplementary.logo,
-                                                               containerAnchor: logoAnchor)
-        let panelSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .absolute(60))
-        let panel = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: panelSize,
-                                                                elementKind: Supplementary.panel,
-                                                                alignment: .bottom)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalWidth(1))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [counter, logo, panel]
-        section.orthogonalScrollingBehavior = .groupPaging
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
+        DispatchQueue.main.async {
+            self.viewItem.configureView(model: self.dataSource[0])
+        }
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.barTintColor = .white
+        
+        mainScrollView = viewItem.configureScrollViewDelegate()
+        mainScrollView.delegate = self
     }
 }
 
@@ -111,47 +59,44 @@ class ItemPageViewController: UIViewController {
 
 extension ItemPageViewController: ItemPageViewControllerProtocol {
     
-    func goBack() {
+    @objc func goBack() {
         navigationController?.popToViewController(mainPageViewController, animated: true)
     }
 }
 
-extension ItemPageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource[0].mainThumbnail.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageViewSwiperCell.reuseID,
-                                                      for: indexPath) as! ImageViewSwiperCell
-        cell.setCell(image: dataSource[0].mainThumbnail[indexPath.row])
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == ImageCounterReusableView.reuseID {
-            let supplementaryElement = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                                       withReuseIdentifier: ImageCounterReusableView.reuseID,
-                                                                                       for: indexPath) as! ImageCounterReusableView
-            DispatchQueue.main.async {
-                supplementaryElement.configure(labelText: "\(indexPath.row + 1)/\(indexPath.count + 1)")
+extension ItemPageViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        let navigationBarAppearScratch = UIScreen.main.bounds.width
+        if offset > navigationBarAppearScratch {
+            UIView.animate(withDuration: 0.1) {
+                let navigationColor = UIColor.white.withAlphaComponent((offset - navigationBarAppearScratch) / 50)
+//                if let navigationController = self.navigationController as? CryshasMainNavigationController {
+//                    if navigationController.navigationBar.isHidden {
+//                        DispatchQueue.once(token: 1) {
+//                            navigationController.addItemPageViewsToNavBar(titleText: self.dataSource[0].shortDescription) {
+//                                self.goBack()
+//                            }
+//                        }
+//                    }
+//                }
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+                if #available(iOS 13.0, *) {
+                    let navBarAppearance = UINavigationBarAppearance()
+                    navBarAppearance.configureWithOpaqueBackground()
+                    navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+                    navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+                    navBarAppearance.backgroundColor = navigationColor
+                    self.navigationController?.navigationBar.standardAppearance = navBarAppearance
+                    self.navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+
+                }
+                
             }
-            return supplementaryElement
+        } else {
+            UIView.animate(withDuration: 0.1) {
+                self.navigationController?.setNavigationBarHidden(true, animated: true)
+            }
         }
-        else if kind == SharedAndFavoritesPanelReusableView.reuseID {
-            let supplementaryElement = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                                       withReuseIdentifier: SharedAndFavoritesPanelReusableView.reuseID,
-                                                                                       for: indexPath) as! SharedAndFavoritesPanelReusableView
-            return supplementaryElement
-        }
-        
-        let supplementaryElement = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                                   withReuseIdentifier: LogoReusableView.reuseID,
-                                                                                   for: indexPath) as! LogoReusableView
-        return supplementaryElement
     }
 }
-
