@@ -165,8 +165,6 @@ class ItemPageView: UIView {
         view.layer.shadowOffset = .zero
         
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.isHidden = true
-        view.alpha = 0
         return view
     }()
     
@@ -196,7 +194,6 @@ class ItemPageView: UIView {
         addSubview(contactsButtonStackView)
         contactsButtonStackView.addArrangedSubview(messageContactButton)
         contactsButtonStackView.addArrangedSubview(callContactButton)
-        addSubview(appearedCustomNavigationBar)
     }
     
     private func setupLayout() {
@@ -276,15 +273,6 @@ class ItemPageView: UIView {
         labelStackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         labelStackView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor).isActive = true
         
-        NSLayoutConstraint.activate(
-            [
-                appearedCustomNavigationBar.leadingAnchor.constraint(equalTo: leadingAnchor),
-                appearedCustomNavigationBar.topAnchor.constraint(equalTo: topAnchor),
-                appearedCustomNavigationBar.trailingAnchor.constraint(equalTo: trailingAnchor),
-                appearedCustomNavigationBar.heightAnchor.constraint(equalToConstant: Metrics.screenHeight * 1/10)
-            ]
-        )
-
     }
     
     private func setupView() {
@@ -449,11 +437,26 @@ class ItemPageView: UIView {
         return mainScrollView
     }
     
-    func configureAppearingOfAppearingView(opacityValue: CGFloat) {
-        appearedCustomNavigationBar.isHidden = false
-        appearedCustomNavigationBar.alpha = opacityValue
+    func customNavigationBarIsHidden(_ value: Bool) {
+        if value {
+            appearedCustomNavigationBar.isHidden = value
+        } else {
+            appearedCustomNavigationBar.isHidden = value
+            guard !self.subviews.contains(appearedCustomNavigationBar) else { return }
+            addSubview(appearedCustomNavigationBar)
+            NSLayoutConstraint.activate(
+                [
+                    appearedCustomNavigationBar.leadingAnchor.constraint(equalTo: leadingAnchor),
+                    appearedCustomNavigationBar.topAnchor.constraint(equalTo: topAnchor),
+                    appearedCustomNavigationBar.trailingAnchor.constraint(equalTo: trailingAnchor),
+                    appearedCustomNavigationBar.heightAnchor.constraint(equalToConstant: Metrics.screenHeight * 1/10)
+                ]
+            )
+            appearedCustomNavigationBar.setNeedsLayout()
+
+        }
     }
-    
+        
     // MARK: - Private Methods
     
     private func createButton(systemImageName: String = "eye") -> UIButton {

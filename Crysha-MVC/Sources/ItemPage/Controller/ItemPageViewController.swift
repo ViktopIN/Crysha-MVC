@@ -63,15 +63,17 @@ extension ItemPageViewController: ItemPageViewControllerProtocol {
 
 extension ItemPageViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset.y
-        let navigationBarAppearScratch = UIScreen.main.bounds.width
+        let offset = (scrollView.contentOffset.y / 10).rounded()
+        let navigationBarAppearScratch = (UIScreen.main.bounds.width / 10).rounded()
         if offset > navigationBarAppearScratch {
-            UIView.animate(withDuration: 0.1) {
-                self.viewItem.configureAppearingOfAppearingView(opacityValue: (offset - navigationBarAppearScratch) / 50 )
+            UIView.animate(withDuration: 1) {
+                self.viewItem.customNavigationBarIsHidden(false)
             }
         } else {
-            UIView.animate(withDuration: 0.1) {
+            UIView.animate(withDuration: 1) {
+                self.viewItem.customNavigationBarIsHidden(true)
             }
+
         }
     }
 }
