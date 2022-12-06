@@ -452,11 +452,58 @@ class ItemPageView: UIView {
                     appearedCustomNavigationBar.heightAnchor.constraint(equalToConstant: Metrics.screenHeight * 1/10)
                 ]
             )
+            addToCustomNavigationBar()
             appearedCustomNavigationBar.setNeedsLayout()
-
         }
     }
+    
+    private func addToCustomNavigationBar() {
+        let navigationBarBackButton: UIButton = {
+            let button = UIButton()
+            button.setImage(UIImage.backButtonImage, for: .normal)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+            return button
+        }()
+        let navigationBarSharedButton = createButton(systemImageName: "square.and.arrow.up")
+        let navigationBarHeartButton = createButton(systemImageName: "heart")
         
+        navigationBarBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
+        let buttons = [navigationBarBackButton, navigationBarSharedButton, navigationBarHeartButton]
+        buttons.forEach { appearedCustomNavigationBar.addSubview($0) }
+        
+        NSLayoutConstraint.activate(
+            [
+                navigationBarBackButton.topAnchor.constraint(equalTo: appearedCustomNavigationBar.topAnchor, constant: 50),
+                navigationBarBackButton.leadingAnchor.constraint(equalTo: appearedCustomNavigationBar.leadingAnchor, constant: 20),
+                navigationBarBackButton.heightAnchor.constraint(equalToConstant: Metrics.backButtonsDiameter),
+                navigationBarBackButton.widthAnchor.constraint(equalTo: backButton.heightAnchor)
+            ]
+        )
+        
+        NSLayoutConstraint.activate(
+            [
+                navigationBarHeartButton.centerYAnchor.constraint(equalTo: navigationBarBackButton.centerYAnchor),
+                navigationBarHeartButton.bottomAnchor.constraint(equalTo: appearedCustomNavigationBar.bottomAnchor, constant: -15),
+                navigationBarHeartButton.trailingAnchor.constraint(equalTo: appearedCustomNavigationBar.trailingAnchor, constant: -15),
+                navigationBarHeartButton.widthAnchor.constraint(equalToConstant: favoriteButton.bounds.width),
+                navigationBarHeartButton.heightAnchor.constraint(equalTo: navigationBarHeartButton.widthAnchor)
+            ]
+        )
+        
+        NSLayoutConstraint.activate(
+            [
+                navigationBarSharedButton.centerYAnchor.constraint(equalTo: navigationBarBackButton.centerYAnchor),
+                navigationBarSharedButton.bottomAnchor.constraint(equalTo: appearedCustomNavigationBar.bottomAnchor, constant: -15),
+                navigationBarSharedButton.trailingAnchor.constraint(equalTo: navigationBarHeartButton.leadingAnchor, constant: -15),
+                navigationBarSharedButton.widthAnchor.constraint(equalToConstant: favoriteButton.bounds.width),
+                navigationBarSharedButton.heightAnchor.constraint(equalTo: navigationBarSharedButton.widthAnchor)
+            ]
+        )
+
+    }
+            
     // MARK: - Private Methods
     
     private func createButton(systemImageName: String = "eye") -> UIButton {
