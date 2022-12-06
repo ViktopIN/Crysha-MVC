@@ -32,6 +32,7 @@
 		84D35B6C29053D5000BB17F3 /* AppDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B6B29053D5000BB17F3 /* AppDelegateExtension.swift */; };
 		84D35B702905463C00BB17F3 /* TabBarItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B6F2905463C00BB17F3 /* TabBarItemModel.swift */; };
 		84D35B772905B16C00BB17F3 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D35B762905B16C00BB17F3 /* UIImageExtension.swift */; };
+		84F06784293F4A09001076A3 /* UINavigationController Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F06783293F4A09001076A3 /* UINavigationController Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		84D35B6B29053D5000BB17F3 /* AppDelegateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateExtension.swift; sourceTree = "<group>"; };
 		84D35B6F2905463C00BB17F3 /* TabBarItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemModel.swift; sourceTree = "<group>"; };
 		84D35B762905B16C00BB17F3 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		84F06783293F4A09001076A3 /* UINavigationController Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +235,7 @@
 				84549A032909844500679A39 /* IntegerExtension.swift */,
 				84B5AC75290AE7A1004EE8BE /* StringExtension.swift */,
 				8467F00829293F4900132E1B /* UIColorExtensions.swift */,
+				84F06783293F4A09001076A3 /* UINavigationController Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F06784293F4A09001076A3 /* UINavigationController Extension.swift in Sources */,
 				84B71281290E9F4A00AD6AD5 /* ItemPageViewController.swift in Sources */,
 				84B71287290EB1CC00AD6AD5 /* Protocols.swift in Sources */,
 				8478213D28FD3C0E00BC1F7F /* MainPageViewController.swift in Sources */,
