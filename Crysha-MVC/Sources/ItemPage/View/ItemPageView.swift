@@ -439,9 +439,10 @@ class ItemPageView: UIView {
     
     func customNavigationBarIsHidden(_ value: Bool) {
         if value {
-            appearedCustomNavigationBar.isHidden = value
+            appearedCustomNavigationBar.removeFromSuperview()
+            appearedCustomNavigationBar.subviews.forEach({ $0.removeFromSuperview() })
+            
         } else {
-            appearedCustomNavigationBar.isHidden = value
             guard !self.subviews.contains(appearedCustomNavigationBar) else { return }
             addSubview(appearedCustomNavigationBar)
             NSLayoutConstraint.activate(
@@ -465,12 +466,19 @@ class ItemPageView: UIView {
             button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
             return button
         }()
+        let navigationBarAnimationLabel: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = shortDescriptLabel.text
+            label.alpha = 0
+            return label
+        }()
         let navigationBarSharedButton = createButton(systemImageName: "square.and.arrow.up")
         let navigationBarHeartButton = createButton(systemImageName: "heart")
         
         navigationBarBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
-        let buttons = [navigationBarBackButton, navigationBarSharedButton, navigationBarHeartButton]
+        let buttons = [navigationBarBackButton, navigationBarAnimationLabel, navigationBarSharedButton, navigationBarHeartButton]
         buttons.forEach { appearedCustomNavigationBar.addSubview($0) }
         
         NSLayoutConstraint.activate(
@@ -484,9 +492,19 @@ class ItemPageView: UIView {
         
         NSLayoutConstraint.activate(
             [
+                navigationBarAnimationLabel.leadingAnchor.constraint(equalTo: navigationBarBackButton.trailingAnchor, constant: 20),
+                navigationBarAnimationLabel.heightAnchor.constraint(equalToConstant: Metrics.backButtonsDiameter),
+                navigationBarAnimationLabel.widthAnchor.constraint(equalToConstant: Metrics.screenWidth / 2)
+            ]
+        )
+        
+        let labelTopConstraint = navigationBarAnimationLabel.topAnchor.constraint(equalTo: appearedCustomNavigationBar.topAnchor)
+        labelTopConstraint.isActive = true
+        
+        NSLayoutConstraint.activate(
+            [
                 navigationBarHeartButton.centerYAnchor.constraint(equalTo: navigationBarBackButton.centerYAnchor),
-                navigationBarHeartButton.bottomAnchor.constraint(equalTo: appearedCustomNavigationBar.bottomAnchor, constant: -15),
-                navigationBarHeartButton.trailingAnchor.constraint(equalTo: appearedCustomNavigationBar.trailingAnchor, constant: -15),
+                navigationBarHeartButton.trailingAnchor.constraint(equalTo: appearedCustomNavigationBar.trailingAnchor, constant: -15 - Metrics.contentsLeadingTrailingOffset),
                 navigationBarHeartButton.widthAnchor.constraint(equalToConstant: favoriteButton.bounds.width),
                 navigationBarHeartButton.heightAnchor.constraint(equalTo: navigationBarHeartButton.widthAnchor)
             ]
@@ -495,13 +513,17 @@ class ItemPageView: UIView {
         NSLayoutConstraint.activate(
             [
                 navigationBarSharedButton.centerYAnchor.constraint(equalTo: navigationBarBackButton.centerYAnchor),
-                navigationBarSharedButton.bottomAnchor.constraint(equalTo: appearedCustomNavigationBar.bottomAnchor, constant: -15),
                 navigationBarSharedButton.trailingAnchor.constraint(equalTo: navigationBarHeartButton.leadingAnchor, constant: -15),
                 navigationBarSharedButton.widthAnchor.constraint(equalToConstant: favoriteButton.bounds.width),
                 navigationBarSharedButton.heightAnchor.constraint(equalTo: navigationBarSharedButton.widthAnchor)
             ]
         )
-
+        // Label animation
+        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0) {
+            navigationBarAnimationLabel.alpha = 1
+            labelTopConstraint.constant = 50
+            navigationBarAnimationLabel.layoutIfNeeded()
+        }
     }
             
     // MARK: - Private Methods
