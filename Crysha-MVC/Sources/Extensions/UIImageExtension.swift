@@ -34,4 +34,9 @@ extension UIImage {
         }
         return scaledImage
     }
+    
+    static var backButtonImage: UIImage {
+        return (UIImage(systemName: "arrow.backward")?.withTintColor(.black,
+                                                                     renderingMode: .alwaysOriginal)) ?? UIImage()
+    }
 }

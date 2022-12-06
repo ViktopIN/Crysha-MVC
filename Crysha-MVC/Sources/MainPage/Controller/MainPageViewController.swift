@@ -12,21 +12,35 @@ class MainPageViewController: UIViewController {
     // MARK: - Properties -
     
     static let sectionHeaderElementKind = "section-header-element-kind"
+    var itemPageViewController: UIViewController!
     
     // MARK: - Views -
     
     var collectionView: UICollectionView! = nil
     
     // MARK: - Initialisation -
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
         setupHierarchy()
         setupLayout()
+        configureNavigationController()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Settings -
+    
+    private func configureNavigationController() {
+        let backBarButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backBarButton
+
+    }
     
     private func configureCollectionView() {
         let collectionView = UICollectionView(frame: view.frame,
@@ -123,7 +137,6 @@ extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDe
                 cell.layer.shadowRadius = 3
                 cell.layer.shadowColor = UIColor.lightGray.cgColor
                 cell.layer.shadowOpacity = 0.8
-                cell.layer.masksToBounds = false
                 cell.layer.shadowOffset = .zero
                 cell.layer.shouldRasterize = true
                 cell.layer.rasterizationScale = UIScreen.main.scale
@@ -144,7 +157,7 @@ extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDe
         cell.layer.shadowOpacity = 0.8
         cell.layer.masksToBounds = false
         cell.layer.shadowOffset = .zero
-        cell.takeModelToCell(this: MainSectionCellModel.getModel()[indexPath.row])
+        cell.takeModelToCell(this: MainModel.getModel()[indexPath.row])
         return cell
     }
     
@@ -162,7 +175,7 @@ extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDe
         if section == 0 {
             return TableCellModel.getModels().count
         }
-        return MainSectionCellModel.getModel().count
+        return MainModel.getModel().count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -173,10 +186,10 @@ extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDe
 extension MainPageViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            let vc = ItemPageViewController()
-            navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(itemPageViewController, animated: true)
             
         }
     }
 }
+
 
