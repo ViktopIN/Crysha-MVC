@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension UINavigationController {
     open override func viewDidLoad() {
@@ -15,17 +16,17 @@ extension UINavigationController {
     }
     
     func insertImage() {
-        let image = UIImageView(image: UIImage(named: "leftItemNavigationControllerImage"))
+        let logoImage = #imageLiteral(resourceName: "logo")
+        let image = UIImageView(image: logoImage)
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.layer.contentsRect = CGRect(x: 0.134, y: 0.18, width: 0.73, height: 0.63)
         image.layer.contentsGravity = .resizeAspectFill
         self.navigationBar.addSubview(image)
         NSLayoutConstraint.activate(
             [
                 image.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor, constant: 25),
                 image.topAnchor.constraint(equalTo: navigationBar.topAnchor),
-                image.heightAnchor.constraint(equalTo: navigationBar.heightAnchor, multiplier: 0.7),
-                image.widthAnchor.constraint(equalTo: navigationBar.widthAnchor, multiplier: 1/5)
+                image.heightAnchor.constraint(equalTo: navigationBar.heightAnchor, multiplier: 0.8),
+                image.widthAnchor.constraint(equalTo: navigationBar.widthAnchor, multiplier: 3/10)
             ]
         )
     }

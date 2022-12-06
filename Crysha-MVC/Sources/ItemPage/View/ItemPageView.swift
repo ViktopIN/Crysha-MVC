@@ -74,10 +74,10 @@ class ItemPageView: UIView {
     
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "logo")
+        imageView.image = #imageLiteral(resourceName: "logo")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = UIColor(named: "navigationControllerColor")
-        imageView.layer.contentsGravity = .resizeAspect
+        imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 12
         imageView.layer.masksToBounds = true
         return imageView
