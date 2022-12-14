@@ -11,7 +11,7 @@ class ItemPageView: UIView {
     
     // MARK: - Properties
     
-    var controller: ItemPageViewControllerProtocol!
+    weak var controller: ItemPageViewControllerProtocol!
     private var mainPageViewController: UIViewController!
     private var countOfImage = Int()
     
