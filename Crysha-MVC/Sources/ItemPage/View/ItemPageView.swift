@@ -11,8 +11,9 @@ class ItemPageView: UIView {
     
     // MARK: - Properties
     
-    weak var controller: ItemPageViewControllerProtocol!
-    var mainPageViewController: UIViewController!
+    var controller: ItemPageViewControllerProtocol!
+    private var mainPageViewController: UIViewController!
+    private var countOfImage = Int()
     
     // MARK: - Views
             
@@ -170,9 +171,8 @@ class ItemPageView: UIView {
     
     // MARK: - Initialiser
     
-    init(frame: CGRect, controller: ItemPageViewControllerProtocol) {
+    override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.controller = controller
         setupHierarchy()
         setupLayout()
         setupView()
@@ -330,21 +330,6 @@ class ItemPageView: UIView {
                 logoImageView.widthAnchor.constraint(equalTo: logoImageView.heightAnchor)
             ]
         )
-        
-        //Configure labelOfImageCounter
-        
-        pagingImageContainerView.addSubview(labelOfImageCounter)
-        NSLayoutConstraint.activate(
-            [
-                labelOfImageCounter.heightAnchor.constraint(equalToConstant: Metrics.screenWidth * 1/18),
-                labelOfImageCounter.widthAnchor.constraint(equalToConstant: Metrics.screenWidth * 1/12),
-                labelOfImageCounter.bottomAnchor.constraint(equalTo: pagingImageContainerView.bottomAnchor,
-                                                            constant: Metrics.labelOfImageCounterBottomOffset),
-                labelOfImageCounter.trailingAnchor.constraint(equalTo: pagingImageContainerView.trailingAnchor,
-                                                            constant: Metrics.labelOfImageCounterTrailingOffset)
-            ]
-        )
-        labelOfImageCounter.text = "1/3"
         
         // Configure priceLabel constraints and text
         labelStackView.addArrangedSubview(priceLabel)

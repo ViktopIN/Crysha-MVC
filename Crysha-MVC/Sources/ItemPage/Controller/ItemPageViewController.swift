@@ -16,10 +16,10 @@ class ItemPageViewController: UIViewController {
         static let counter = "imageCounterReusableView"
         static let panel = "sharedAndFavoritesPanelReusableView"
     }
-    var mainPageViewController: UIViewController = MainPageViewController()
+    weak var mainPageViewController: UIViewController!
     private var mainScrollView: UIScrollView!
-    var viewItem: ItemPageView!
-    private var dataSource = MainModel.getModel()
+    var viewItem: ItemPageView! = ItemPageView(frame: .zero)
+    var dataSource: MainModel!
     
     // MARK: - Lifecycle
     
@@ -42,9 +42,10 @@ class ItemPageViewController: UIViewController {
     // MARK: - Settings
     
     private func setupView() {
+        viewItem.controller = self
         view = viewItem
         DispatchQueue.main.async {
-            self.viewItem.configureView(model: self.dataSource[0])
+            self.viewItem.configureView(model: self.dataSource)
         }
         
         mainScrollView = viewItem.configureScrollViewDelegate()
@@ -77,3 +78,4 @@ extension ItemPageViewController: UIScrollViewDelegate {
         }
     }
 }
+
