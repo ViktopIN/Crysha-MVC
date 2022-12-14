@@ -12,7 +12,7 @@ class MainPageViewController: UIViewController {
     // MARK: - Properties -
     
     static let sectionHeaderElementKind = "section-header-element-kind"
-    var itemPageViewController: UIViewController!
+    private let dataSource = MainModel.getModel()
     
     // MARK: - Views -
     
@@ -186,6 +186,9 @@ extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDe
 extension MainPageViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
+            let itemPageViewController = ItemPageViewController()
+            itemPageViewController.dataSource = dataSource[indexPath.item]
+            itemPageViewController.mainPageViewController = self
             navigationController?.pushViewController(itemPageViewController, animated: true)
             
         }
